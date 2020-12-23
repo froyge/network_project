@@ -25,7 +25,7 @@
 
 Наслаждайтесь!
 
-#System requirements:
+**System requirements**
 
 ОС: любая
 
