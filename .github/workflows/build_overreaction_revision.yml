@@ -7,6 +7,12 @@ on:
     paths:
       - 'scripts/build_overreaction_revision.py'
       - '.github/workflows/build_overreaction_revision.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'scripts/build_overreaction_revision.py'
+      - '.github/workflows/build_overreaction_revision.yml'
   workflow_dispatch:
 
 permissions:
