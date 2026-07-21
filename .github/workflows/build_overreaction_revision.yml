@@ -1,0 +1,32 @@
+name: Build revised overreaction model artifacts
+
+on:
+  push:
+    branches:
+      - chatgpt-overreaction-revision-20260721
+    paths:
+      - 'scripts/build_overreaction_revision.py'
+      - '.github/workflows/build_overreaction_revision.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install python-docx openpyxl
+      - name: Build Word and Excel files
+        run: python scripts/build_overreaction_revision.py
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: revised-overreaction-model-package
+          path: output/*
+          if-no-files-found: error
