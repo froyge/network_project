@@ -6,12 +6,14 @@ on:
       - chatgpt-overreaction-revision-20260721
     paths:
       - 'scripts/build_overreaction_revision.py'
+      - 'scripts/augment_overreaction_revision.py'
       - '.github/workflows/build_overreaction_revision.yml'
   pull_request:
     branches:
       - main
     paths:
       - 'scripts/build_overreaction_revision.py'
+      - 'scripts/augment_overreaction_revision.py'
       - '.github/workflows/build_overreaction_revision.yml'
   workflow_dispatch:
 
@@ -30,9 +32,11 @@ jobs:
         run: pip install python-docx openpyxl
       - name: Build Word and Excel files
         run: python scripts/build_overreaction_revision.py
+      - name: Add article benchmark slices
+        run: python scripts/augment_overreaction_revision.py
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: revised-overreaction-model-package
+          name: revised-overreaction-model-package-v2
           path: output/*
           if-no-files-found: error
